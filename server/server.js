@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
+
 require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
@@ -14,8 +16,11 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API Running");
+// Serve React frontend
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
