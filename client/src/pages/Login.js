@@ -3,13 +3,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
+
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
   const loginUser = async () => {
+
     try {
+
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/auth/login`,
         {
@@ -18,26 +22,41 @@ function Login() {
         }
       );
 
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
+      console.log(res.data);
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(res.data.user)
-      );
+      if (res.data.token) {
 
-      alert("Login Successful");
+        localStorage.setItem(
+          "token",
+          res.data.token
+        );
 
-      navigate("/");
+        localStorage.setItem(
+          "user",
+          JSON.stringify(res.data.user)
+        );
+
+        alert("Login Successful");
+
+        navigate("/");
+
+      } else {
+
+        alert("Token not received");
+      }
+
     } catch (error) {
+
+      console.log(error);
+
       alert("Invalid Credentials");
     }
   };
 
   return (
+
     <div className="container">
+
       <h1>Login</h1>
 
       <input
@@ -61,6 +80,7 @@ function Login() {
       <button onClick={loginUser}>
         Login
       </button>
+
     </div>
   );
 }
