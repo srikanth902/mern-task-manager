@@ -15,10 +15,12 @@ function App() {
   const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
+const storedUser = localStorage.getItem("user");
 
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
+const user =
+  storedUser && storedUser !== "undefined"
+    ? JSON.parse(storedUser)
+    : {};
 
   const token = localStorage.getItem("token");
 
