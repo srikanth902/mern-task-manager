@@ -1,1 +1,3 @@
-const API_URL = "https://mern-task-manager-production-74a9.up.railway.app";git
+const API_URL = "https://mern-task-manager-production-74a9.up.railway.app";
+
+export default API_URL;
