@@ -1,3 +1,4 @@
+import API_URL from "../api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,7 +16,7 @@ function Login() {
     try {
 
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/auth/login`,
+       `${API_URL}/api/auth/login`,
         {
           email,
           password,
